@@ -2,7 +2,8 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import loginButton from '../components/loginButton';
 import logoutButton from '../components/logoutButton';
-import client from '../../utils/apiKeys';
+// eslint-disable-next-line import/extensions, import/no-unresolved
+import client from '../utils/sample_data/client.js';
 
 const ViewDirectorBasedOnUserAuthStatus = () => {
   firebase.initializeApp(client);

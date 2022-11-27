@@ -1,10 +1,8 @@
-import '../styles/main.scss'; // You have to import your styles for them to work. Comment in this line
-import { students, voldysArmy } from '../utils/data/studentArray';
-import renderToDOM from '../utils/renderToDom';
-import {
-  filterBtnRow, studentsOnDom, studentAreas, startSortingBtn, header, htmlStructure
-} from '../components/shared/dombuilder';
-import sortStudent from '../utils/data/logic';
+import renderToDOM from '../../utils/renderToDom';
+import sortStudent from '../../utils/data/logic';
+import { filterBtnRow, studentAreas, studentsOnDom } from '../shared/dombuilder';
+
+import { students, voldysArmy } from '../../utils/data/studentArray';
 
 // add form to DOM on start-sorting click.
 // Add events for form after the form is on the DOM
@@ -38,22 +36,18 @@ const events = () => {
   });
 
   // target expel buttons to move to voldys army
-  document
-    .querySelector('#student-container')
-    .addEventListener('click', (e) => {
-      if (e.target.id.includes('expel')) {
-        const [, id] = e.target.id.split('--');
-        const index = students.findIndex(
-          (student) => student.id === Number(id)
-        );
+  document.querySelector('#student-container').addEventListener('click', (e) => {
+    if (e.target.id.includes('expel')) {
+      const [, id] = e.target.id.split('--');
+      const index = students.findIndex((student) => student.id === Number(id));
 
-        // move from one array to another
-        voldysArmy.push(...students.splice(index, 1));
-        // get both sets of students on the DOM
-        studentsOnDom('#students', students);
-        studentsOnDom('#voldy', voldysArmy);
-      }
-    });
+      // move from one array to another
+      voldysArmy.push(...students.splice(index, 1));
+      // get both sets of students on the DOM
+      studentsOnDom('#students', students);
+      studentsOnDom('#voldy', voldysArmy);
+    }
+  });
 
   // target filter buttons on Dom
   document.querySelector('#filter-container').addEventListener('click', (e) => {
@@ -69,12 +63,4 @@ const events = () => {
     }
   });
 };
-
-const startApp = () => {
-  htmlStructure(); // always load first
-  header();
-  startSortingBtn();
-  events(); // always load last
-};
-
-startApp();
+export default events;
